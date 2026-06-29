@@ -179,8 +179,6 @@ public class ConfigData {
 
         setDiscordEnabled((boolean) getDefaultValue("discord.enabled", false));
         setDiscordWebhookUrl((String) getDefaultValue("discord.webhook-url", ""));
-        setDiscordUsername((String) getDefaultValue("discord.username", "Rollback Logger"));
-        setDiscordAvatarUrl((String) getDefaultValue("discord.avatar-url", ""));
         setDiscordServerName((String) getDefaultValue("discord.server-name", ""));
         setDiscordEmbedEnabled((boolean) getDefaultValue("discord.embed.enabled", true));
         setDiscordEmbedColor((String) getDefaultValue("discord.embed.color", "#57F287"));
@@ -401,14 +399,6 @@ public class ConfigData {
 
     public static String getDiscordWebhookUrl() {
         return discordWebhookUrl;
-    }
-
-    public static String getDiscordUsername() {
-        return discordUsername;
-    }
-
-    public static String getDiscordAvatarUrl() {
-        return discordAvatarUrl;
     }
 
     public static String getDiscordServerName() {

@@ -46,8 +46,6 @@ public class DiscordWebhookManager {
     private void loadConfig() {
         this.enabled = ConfigData.isDiscordEnabled();
         this.webhookUrl = ConfigData.getDiscordWebhookUrl();
-        this.username = ConfigData.getDiscordUsername();
-        this.avatarUrl = ConfigData.getDiscordAvatarUrl();
         this.embedEnabled = ConfigData.isDiscordEmbedEnabled();
         this.embedColor = parseHexColor(ConfigData.getDiscordEmbedColor());
         this.embedTitle = ConfigData.getDiscordEmbedTitle();

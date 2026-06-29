@@ -98,7 +98,7 @@ discord:
     title: "Rollback Completed"
     footer: "InventoryRollbackPlus | Mangy Fork"
     timestamp: true
-    thumbnail: "https://imgs.search.brave.com/0cOOSG-PC7QzAgCGeg6BoGnM7QayA4-EXlGb10v0SSg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy90/aHVtYi83Lzc3L0dv/b2dsZV9JbWFnZXNf/MjAxNV9sb2dvLnN2/Zy8yNTBweC1Hb29n/bGVfSW1hZ2VzXzIw/MTVfbG9nby5zdmcu/cG5nP3V0bV9zb3Vy/Y2U9d3d3Lndpa2lk/YXRhLm9yZyZhbXA7/dXRtX2NhbXBhaWdu/PWluZGV4JmFtcDt1/dG1fY29udGVudD10/aHVtYm5haWw"
+    thumbnail: ""
 
 # Debug mode - Prints extra information to the console.
 debug: false

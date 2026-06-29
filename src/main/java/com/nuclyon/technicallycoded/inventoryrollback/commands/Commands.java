@@ -3,14 +3,14 @@ package com.nuclyon.technicallycoded.inventoryrollback.commands;
 import com.nuclyon.technicallycoded.inventoryrollback.InventoryRollbackPlus;
 import com.nuclyon.technicallycoded.inventoryrollback.commands.inventoryrollback.*;
 import me.danjono.inventoryrollback.config.MessageData;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Commands implements CommandExecutor, TabCompleter {
 
