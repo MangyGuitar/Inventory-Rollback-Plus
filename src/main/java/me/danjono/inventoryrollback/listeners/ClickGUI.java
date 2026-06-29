@@ -455,7 +455,7 @@ public class ClickGUI implements Listener {
                                 RollbackData rbData = new RollbackData(
                                         offlinePlayer.getName(), staff.getName(), itemCount,
                                         rollbackId, world, locX, locY, locZ,
-                                        time, true);
+                                        time,true);
                                 DiscordWebhookManager.getInstance().sendRollbackWebhook(rbData);
                             }
                         }.runTaskAsynchronously(main);

@@ -120,6 +120,7 @@ public class ConfigData {
     private static String discordEmbedTitle;
     private static String discordEmbedFooter;
     private static boolean discordEmbedTimestamp;
+    private static String discordEmbedThumbnail;
 
     public void setVariables() {		
         setEnabled((boolean) getDefaultValue("enabled", true));
@@ -186,6 +187,7 @@ public class ConfigData {
         setDiscordEmbedTitle((String) getDefaultValue("discord.embed.title", "Rollback Completed"));
         setDiscordEmbedFooter((String) getDefaultValue("discord.embed.footer", "InventoryRollbackPlus"));
         setDiscordEmbedTimestamp((boolean) getDefaultValue("discord.embed.timestamp", true));
+        setDiscordEmbedThumbnail((String) getDefaultValue("discord.embed.thumbnail", ""));
 
         if (saveChanges())
             saveConfig();
@@ -389,6 +391,8 @@ public class ConfigData {
         discordEmbedTimestamp = enabled;
     }
 
+    public static void setDiscordEmbedThumbnail(String thumbnail) { discordEmbedThumbnail = thumbnail;}
+
     // Discord getters
 
     public static boolean isDiscordEnabled() {
@@ -429,6 +433,10 @@ public class ConfigData {
 
     public static boolean isDiscordEmbedTimestamp() {
         return discordEmbedTimestamp;
+    }
+
+    public static String getDiscordEmbedThumbnail() {
+        return discordEmbedThumbnail;
     }
 
     public static boolean isEnabled() {

@@ -27,6 +27,7 @@ public class DiscordWebhookManager {
     private String embedTitle;
     private String embedFooter;
     private boolean embedTimestamp;
+    private String embedThumbnail;
     private String serverName;
 
     private DiscordWebhookManager() {}
@@ -52,6 +53,7 @@ public class DiscordWebhookManager {
         this.embedTitle = ConfigData.getDiscordEmbedTitle();
         this.embedFooter = ConfigData.getDiscordEmbedFooter();
         this.embedTimestamp = ConfigData.isDiscordEmbedTimestamp();
+        this.embedThumbnail = ConfigData.getDiscordEmbedThumbnail();
         this.serverName = ConfigData.getDiscordServerName();
     }
 
@@ -106,6 +108,10 @@ public class DiscordWebhookManager {
 
         if (embedTimestamp) {
             embedBuilder.timestamp(formatIsoTimestamp(System.currentTimeMillis()));
+        }
+
+        if (embedThumbnail != null && !embedThumbnail.isEmpty()) {
+            embedBuilder.thumbnail(embedThumbnail);
         }
 
         return new DiscordWebhookPayload.Builder()
@@ -243,6 +249,10 @@ public class DiscordWebhookManager {
 
         if (embed.getTimestamp() != null && !embed.getTimestamp().isEmpty()) {
             json.append("\"timestamp\":").append(escapeJson(embed.getTimestamp())).append(",");
+        }
+
+        if (embed.getThumbnail() != null && !embed.getThumbnail().isEmpty()) {
+            json.append("\"thumbnail\":{\"url\":").append(escapeJson(embed.getThumbnail())).append("},");
         }
 
         if (!embed.getFields().isEmpty()) {
