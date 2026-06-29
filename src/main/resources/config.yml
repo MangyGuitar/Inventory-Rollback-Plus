@@ -85,5 +85,19 @@ update-checker: true
 ## Please leave enabled as it helps us improve the plugin and provide better features.
 bStats: true
 
+## Discord webhook integration for rollback notifications.
+discord:
+  enabled: false
+  webhook-url: ""
+  username: "Rollback Logger"
+  avatar-url: ""
+  server-name: ""
+  embed:
+    enabled: true
+    color: "#57F287"
+    title: "Rollback Completed"
+    footer: "InventoryRollbackPlus | Mangy Fork"
+    timestamp: true
+
 # Debug mode - Prints extra information to the console.
 debug: false

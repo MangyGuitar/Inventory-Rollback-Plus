@@ -2,6 +2,8 @@ package me.danjono.inventoryrollback.listeners;
 
 import com.nuclyon.technicallycoded.inventoryrollback.InventoryRollbackPlus;
 import com.nuclyon.technicallycoded.inventoryrollback.customdata.CustomDataItemEditor;
+import com.nuclyon.technicallycoded.inventoryrollback.discord.DiscordWebhookManager;
+import com.nuclyon.technicallycoded.inventoryrollback.discord.DiscordWebhookManager.RollbackData;
 import com.tcoded.lightlibs.bukkitversion.BukkitVersion;
 import com.tcoded.lightlibs.bukkitversion.MCVersion;
 import io.papermc.lib.PaperLib;
@@ -427,12 +429,36 @@ public class ClickGUI implements Listener {
                                 catch (ExecutionException | InterruptedException ex) { ex.printStackTrace(); }
                             }
 
-                            // Send player & staff feedback
-                            player.sendMessage(MessageData.getPluginPrefix() + MessageData.getMainInventoryRestoredPlayer(staff.getName()));
-                            if (!staff.getUniqueId().equals(player.getUniqueId()))
-                                staff.sendMessage(MessageData.getPluginPrefix() + MessageData.getMainInventoryRestored(offlinePlayer.getName()));
-                        }
-                    }.runTaskAsynchronously(main);
+                                // Send player & staff feedback
+                                player.sendMessage(MessageData.getPluginPrefix() + MessageData.getMainInventoryRestoredPlayer(staff.getName()));
+                                if (!staff.getUniqueId().equals(player.getUniqueId()))
+                                    staff.sendMessage(MessageData.getPluginPrefix() + MessageData.getMainInventoryRestored(offlinePlayer.getName()));
+
+                                // Send Discord webhook
+                                int itemCount = 0;
+                                if (inventory != null) {
+                                    for (ItemStack item : inventory) {
+                                        if (item != null) itemCount++;
+                                    }
+                                }
+                                if (armour != null) {
+                                    for (ItemStack item : armour) {
+                                        if (item != null) itemCount++;
+                                    }
+                                }
+                                String time = PlayerData.getTime(timestamp);
+                                String world = data.getWorld();
+                                double locX = data.getX();
+                                double locY = data.getY();
+                                double locZ = data.getZ();
+                                String rollbackId = String.valueOf(timestamp);
+                                RollbackData rbData = new RollbackData(
+                                        offlinePlayer.getName(), staff.getName(), itemCount,
+                                        rollbackId, world, locX, locY, locZ,
+                                        time, true);
+                                DiscordWebhookManager.getInstance().sendRollbackWebhook(rbData);
+                            }
+                        }.runTaskAsynchronously(main);
 
                 } else {
                     staff.sendMessage(MessageData.getPluginPrefix() + MessageData.getMainInventoryNotOnline(offlinePlayer.getName()));

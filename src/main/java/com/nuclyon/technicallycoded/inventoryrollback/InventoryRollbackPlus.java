@@ -2,6 +2,7 @@ package com.nuclyon.technicallycoded.inventoryrollback;
 
 import com.nuclyon.technicallycoded.inventoryrollback.UpdateChecker.UpdateResult;
 import com.nuclyon.technicallycoded.inventoryrollback.commands.Commands;
+import com.nuclyon.technicallycoded.inventoryrollback.discord.DiscordWebhookManager;
 import com.nuclyon.technicallycoded.inventoryrollback.util.TimeZoneUtil;
 import com.nuclyon.technicallycoded.inventoryrollback.util.test.SelfTestSerialization;
 import com.tcoded.lightlibs.bukkitversion.BukkitVersion;
@@ -102,6 +103,9 @@ public class InventoryRollbackPlus extends InventoryRollback {
 
         // Run self-tests
         SelfTestSerialization.runTests();
+
+        // Discord webhook
+        DiscordWebhookManager.getInstance().onEnable();
     }
 
     @Override

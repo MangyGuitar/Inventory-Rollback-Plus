@@ -109,6 +109,18 @@ public class ConfigData {
     private static boolean bStatsEnabled;
     private static boolean debugEnabled;
 
+    // Discord webhook
+    private static boolean discordEnabled;
+    private static String discordWebhookUrl;
+    private static String discordUsername;
+    private static String discordAvatarUrl;
+    private static String discordServerName;
+    private static boolean discordEmbedEnabled;
+    private static String discordEmbedColor;
+    private static String discordEmbedTitle;
+    private static String discordEmbedFooter;
+    private static boolean discordEmbedTimestamp;
+
     public void setVariables() {		
         setEnabled((boolean) getDefaultValue("enabled", true));
 
@@ -163,6 +175,17 @@ public class ConfigData {
         setUpdateChecker((boolean) getDefaultValue("update-checker", true));
         setbStatsEnabled((boolean) getDefaultValue("bStats", true));
         setDebugEnabled((boolean) getDefaultValue("debug", false));
+
+        setDiscordEnabled((boolean) getDefaultValue("discord.enabled", false));
+        setDiscordWebhookUrl((String) getDefaultValue("discord.webhook-url", ""));
+        setDiscordUsername((String) getDefaultValue("discord.username", "Rollback Logger"));
+        setDiscordAvatarUrl((String) getDefaultValue("discord.avatar-url", ""));
+        setDiscordServerName((String) getDefaultValue("discord.server-name", ""));
+        setDiscordEmbedEnabled((boolean) getDefaultValue("discord.embed.enabled", true));
+        setDiscordEmbedColor((String) getDefaultValue("discord.embed.color", "#57F287"));
+        setDiscordEmbedTitle((String) getDefaultValue("discord.embed.title", "Rollback Completed"));
+        setDiscordEmbedFooter((String) getDefaultValue("discord.embed.footer", "InventoryRollbackPlus"));
+        setDiscordEmbedTimestamp((boolean) getDefaultValue("discord.embed.timestamp", true));
 
         if (saveChanges())
             saveConfig();
@@ -322,6 +345,90 @@ public class ConfigData {
 
     public static void setDebugEnabled(boolean enabled) {
         debugEnabled = enabled;
+    }
+
+    // Discord setters
+
+    public static void setDiscordEnabled(boolean enabled) {
+        discordEnabled = enabled;
+    }
+
+    public static void setDiscordWebhookUrl(String url) {
+        discordWebhookUrl = url;
+    }
+
+    public static void setDiscordUsername(String username) {
+        discordUsername = username;
+    }
+
+    public static void setDiscordAvatarUrl(String url) {
+        discordAvatarUrl = url;
+    }
+
+    public static void setDiscordServerName(String name) {
+        discordServerName = name;
+    }
+
+    public static void setDiscordEmbedEnabled(boolean enabled) {
+        discordEmbedEnabled = enabled;
+    }
+
+    public static void setDiscordEmbedColor(String color) {
+        discordEmbedColor = color;
+    }
+
+    public static void setDiscordEmbedTitle(String title) {
+        discordEmbedTitle = title;
+    }
+
+    public static void setDiscordEmbedFooter(String footer) {
+        discordEmbedFooter = footer;
+    }
+
+    public static void setDiscordEmbedTimestamp(boolean enabled) {
+        discordEmbedTimestamp = enabled;
+    }
+
+    // Discord getters
+
+    public static boolean isDiscordEnabled() {
+        return discordEnabled;
+    }
+
+    public static String getDiscordWebhookUrl() {
+        return discordWebhookUrl;
+    }
+
+    public static String getDiscordUsername() {
+        return discordUsername;
+    }
+
+    public static String getDiscordAvatarUrl() {
+        return discordAvatarUrl;
+    }
+
+    public static String getDiscordServerName() {
+        return discordServerName;
+    }
+
+    public static boolean isDiscordEmbedEnabled() {
+        return discordEmbedEnabled;
+    }
+
+    public static String getDiscordEmbedColor() {
+        return discordEmbedColor;
+    }
+
+    public static String getDiscordEmbedTitle() {
+        return discordEmbedTitle;
+    }
+
+    public static String getDiscordEmbedFooter() {
+        return discordEmbedFooter;
+    }
+
+    public static boolean isDiscordEmbedTimestamp() {
+        return discordEmbedTimestamp;
     }
 
     public static boolean isEnabled() {

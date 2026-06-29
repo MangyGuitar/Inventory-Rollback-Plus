@@ -2,6 +2,7 @@ package com.nuclyon.technicallycoded.inventoryrollback.commands.inventoryrollbac
 
 import com.nuclyon.technicallycoded.inventoryrollback.InventoryRollbackPlus;
 import com.nuclyon.technicallycoded.inventoryrollback.commands.IRPCommand;
+import com.nuclyon.technicallycoded.inventoryrollback.discord.DiscordWebhookManager;
 import me.danjono.inventoryrollback.config.ConfigData;
 import me.danjono.inventoryrollback.config.MessageData;
 import org.bukkit.command.Command;
@@ -20,6 +21,7 @@ public class ReloadSubCmd extends IRPCommand {
             config.generateConfigFile();
             config.setVariables();
             main.startupTasks();
+            DiscordWebhookManager.getInstance().reload();
 
             sender.sendMessage(MessageData.getPluginPrefix() + MessageData.getPluginReload());
         } else {
