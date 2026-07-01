@@ -565,7 +565,7 @@ public class Buttons {
         return item;
     }
 
-    public ItemStack healthButton(LogType logType, Double health) {    	
+    public ItemStack healthButton(LogType logType, Long timestamp, Double health) {    	
         ItemStack item = new ItemStack(getHealthIcon());
 
         ItemMeta meta = item.getItemMeta();
@@ -578,13 +578,14 @@ public class Buttons {
 
         nbt.setString("uuid", uuid.toString());
         nbt.setString("logType", logType.name());
+        nbt.setLong("timestamp", timestamp);
         nbt.setDouble("health", health);
         item = nbt.setItemData();
 
         return item;
     }
 
-    public ItemStack hungerButton(LogType logType, int hunger, float saturation) {    	
+    public ItemStack hungerButton(LogType logType, Long timestamp, int hunger, float saturation) {    	
         ItemStack item = new ItemStack(getHungerIcon());
 
         ItemMeta meta = item.getItemMeta();
@@ -597,6 +598,7 @@ public class Buttons {
 
         nbt.setString("uuid", uuid.toString());
         nbt.setString("logType", logType.name());
+        nbt.setLong("timestamp", timestamp);
         nbt.setInt("hunger", hunger);
         nbt.setFloat("saturation", saturation);
         item = nbt.setItemData();
@@ -604,7 +606,7 @@ public class Buttons {
         return item;
     }
 
-    public ItemStack experiencePotion(LogType logType, float xp) {    	
+    public ItemStack experiencePotion(LogType logType, Long timestamp, float xp) {    	
         ItemStack item = new ItemStack(getExperienceIcon());
 
         ItemMeta meta = item.getItemMeta();
@@ -621,6 +623,7 @@ public class Buttons {
 
         nbt.setString("uuid", uuid.toString());
         nbt.setString("logType", logType.name());
+        nbt.setLong("timestamp", timestamp);
         nbt.setFloat("xp", xp);
         item = nbt.setItemData();
 

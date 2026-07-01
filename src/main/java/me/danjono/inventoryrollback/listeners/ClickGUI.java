@@ -373,6 +373,29 @@ public class ClickGUI implements Listener {
                         staff.getInventory().addItem(firstShulker, secondShulker);
                         staff.closeInventory();
                     });
+
+                    int itemCount = 0;
+                    if (mainInventory != null) {
+                        for (ItemStack item : mainInventory) {
+                            if (item != null) itemCount++;
+                        }
+                    }
+                    if (extraItems != null) {
+                        for (ItemStack item : extraItems) {
+                            if (item != null) itemCount++;
+                        }
+                    }
+                    String time = PlayerData.getTime(timestamp);
+                    String world = data.getWorld();
+                    double locX = data.getX();
+                    double locY = data.getY();
+                    double locZ = data.getZ();
+                    String rollbackId = String.valueOf(timestamp);
+                    RollbackData rbData = new RollbackData(
+                            offlinePlayer.getName(), staff.getName(), itemCount,
+                            rollbackId, world, locX, locY, locZ,
+                            time, true);
+                    DiscordWebhookManager.getInstance().sendRollbackWebhook(rbData);
                 });
             }
 
@@ -559,6 +582,27 @@ public class ClickGUI implements Listener {
                     player.sendMessage(MessageData.getPluginPrefix() + MessageData.getHealthRestoredPlayer(staff.getName()));
                     if (!staff.getUniqueId().equals(player.getUniqueId()))
                         staff.sendMessage(MessageData.getPluginPrefix() + MessageData.getHealthRestored(player.getName()));
+
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            PlayerData data = new PlayerData(offlinePlayer, logType, timestamp);
+                            if (ConfigData.getSaveType() == ConfigData.SaveType.MYSQL) {
+                                try { data.getAllBackupData().get(); }
+                                catch (ExecutionException | InterruptedException ex) { ex.printStackTrace(); }
+                            }
+                            String time = PlayerData.getTime(timestamp);
+                            String world = data.getWorld();
+                            double locX = data.getX();
+                            double locY = data.getY();
+                            double locZ = data.getZ();
+                            RollbackData rbData = new RollbackData(
+                                    offlinePlayer.getName(), staff.getName(), 0,
+                                    String.valueOf(timestamp), world, locX, locY, locZ,
+                                    time, true);
+                            DiscordWebhookManager.getInstance().sendRollbackWebhook(rbData);
+                        }
+                    }.runTaskAsynchronously(main);
                 } else {
                     staff.sendMessage(MessageData.getPluginPrefix() + MessageData.getHealthNotOnline(offlinePlayer.getName()));
                 }
@@ -586,6 +630,27 @@ public class ClickGUI implements Listener {
                     player.sendMessage(MessageData.getPluginPrefix() + MessageData.getHungerRestoredPlayer(staff.getName()));
                     if (!staff.getUniqueId().equals(player.getUniqueId()))
                         staff.sendMessage(MessageData.getPluginPrefix() + MessageData.getHungerRestored(player.getName()));
+
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            PlayerData data = new PlayerData(offlinePlayer, logType, timestamp);
+                            if (ConfigData.getSaveType() == ConfigData.SaveType.MYSQL) {
+                                try { data.getAllBackupData().get(); }
+                                catch (ExecutionException | InterruptedException ex) { ex.printStackTrace(); }
+                            }
+                            String time = PlayerData.getTime(timestamp);
+                            String world = data.getWorld();
+                            double locX = data.getX();
+                            double locY = data.getY();
+                            double locZ = data.getZ();
+                            RollbackData rbData = new RollbackData(
+                                    offlinePlayer.getName(), staff.getName(), 0,
+                                    String.valueOf(timestamp), world, locX, locY, locZ,
+                                    time, true);
+                            DiscordWebhookManager.getInstance().sendRollbackWebhook(rbData);
+                        }
+                    }.runTaskAsynchronously(main);
                 } else {
                     staff.sendMessage(MessageData.getPluginPrefix() + MessageData.getHungerNotOnline(offlinePlayer.getName()));
                 }
@@ -612,6 +677,27 @@ public class ClickGUI implements Listener {
                     player.sendMessage(MessageData.getPluginPrefix() + MessageData.getExperienceRestoredPlayer(staff.getName(), level));
                     if (!staff.getUniqueId().equals(player.getUniqueId()))
                         staff.sendMessage(MessageData.getPluginPrefix() + MessageData.getExperienceRestored(player.getName(), level));
+
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            PlayerData data = new PlayerData(offlinePlayer, logType, timestamp);
+                            if (ConfigData.getSaveType() == ConfigData.SaveType.MYSQL) {
+                                try { data.getAllBackupData().get(); }
+                                catch (ExecutionException | InterruptedException ex) { ex.printStackTrace(); }
+                            }
+                            String time = PlayerData.getTime(timestamp);
+                            String world = data.getWorld();
+                            double locX = data.getX();
+                            double locY = data.getY();
+                            double locZ = data.getZ();
+                            RollbackData rbData = new RollbackData(
+                                    offlinePlayer.getName(), staff.getName(), 0,
+                                    String.valueOf(timestamp), world, locX, locY, locZ,
+                                    time, true);
+                            DiscordWebhookManager.getInstance().sendRollbackWebhook(rbData);
+                        }
+                    }.runTaskAsynchronously(main);
                 } else {				    
                     staff.sendMessage(MessageData.getPluginPrefix() + MessageData.getExperienceNotOnlinePlayer(offlinePlayer.getName()));
                 }
@@ -799,6 +885,7 @@ public class ClickGUI implements Listener {
                             }
 
                             shulkers.add(shulker);
+
                         }
                     };
 
@@ -806,6 +893,23 @@ public class ClickGUI implements Listener {
                         staff.getInventory().addItem(shulkers.toArray(new ItemStack[0]));
                         staff.closeInventory();
                     });
+
+                    int itemCount = 0;
+                    if (enderChest != null) {
+                        for (ItemStack item : enderChest) {
+                            if (item != null) itemCount++;
+                        }
+                    }
+                    String time = PlayerData.getTime(timestamp);
+                    String world = data.getWorld();
+                    double locX = data.getX();
+                    double locY = data.getY();
+                    double locZ = data.getZ();
+                    RollbackData rbData = new RollbackData(
+                            offlinePlayer.getName(), staff.getName(), itemCount,
+                            String.valueOf(timestamp), world, locX, locY, locZ,
+                            time, true);
+                    DiscordWebhookManager.getInstance().sendRollbackWebhook(rbData);
                 });
             }
 
@@ -851,6 +955,24 @@ public class ClickGUI implements Listener {
                             } catch (NullPointerException | ExecutionException | InterruptedException ex) {
                                 ex.printStackTrace();
                             }
+
+                            ItemStack[] enderChest = data.getEnderChest();
+                            int itemCount = 0;
+                            if (enderChest != null) {
+                                for (ItemStack item : enderChest) {
+                                    if (item != null) itemCount++;
+                                }
+                            }
+                            String time = PlayerData.getTime(timestamp);
+                            String world = data.getWorld();
+                            double locX = data.getX();
+                            double locY = data.getY();
+                            double locZ = data.getZ();
+                            RollbackData rbData = new RollbackData(
+                                    offlinePlayer.getName(), staff.getName(), itemCount,
+                                    String.valueOf(timestamp), world, locX, locY, locZ,
+                                    time, true);
+                            DiscordWebhookManager.getInstance().sendRollbackWebhook(rbData);
                         }
                     }.runTaskAsynchronously(main);
 

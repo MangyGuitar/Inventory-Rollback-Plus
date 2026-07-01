@@ -59,7 +59,6 @@ public class DiscordWebhookManager {
 
     public void sendRollbackWebhook(RollbackData data) {
         if (!enabled || webhookUrl == null || webhookUrl.isEmpty()) return;
-
         DiscordWebhookPayload payload;
         if (embedEnabled) {
             payload = buildRollbackEmbed(data);

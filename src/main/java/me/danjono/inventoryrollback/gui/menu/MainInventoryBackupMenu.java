@@ -87,13 +87,13 @@ public class MainInventoryBackupMenu {
 		inventory.setItem(50, buttons.enderChestButton(logType, timestamp, enderChest));
 
 		//Add health icon
-		inventory.setItem(51, buttons.healthButton(logType, health));
+		inventory.setItem(51, buttons.healthButton(logType, timestamp, health));
 
 		//Add hunger icon
-		inventory.setItem(52, buttons.hungerButton(logType, hunger, saturation));
+		inventory.setItem(52, buttons.hungerButton(logType, timestamp, hunger, saturation));
 
 		//Add Experience Bottle
-		inventory.setItem(53, buttons.experiencePotion(logType, xp));
+		inventory.setItem(53, buttons.experiencePotion(logType, timestamp, xp));
 	}
 	
 	public Inventory getInventory() {

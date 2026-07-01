@@ -196,6 +196,7 @@ public class InventoryRollbackPlus extends InventoryRollback {
                         "A " + prioLevelName + " update to InventoryRollbackPlus is available!\n" +
                         "Download at https://www.spigotmc.org/resources/inventoryrollbackplus-1-8-1-16-x.85811/\n" +
                         "(current: " + result.getCurrentVer() + ", latest: " + result.getLatestVer() + ")\n" +
+                        "AVISO, ESTE ES UN FORK, SI LO ACTUALIZAS DEJARAN DE FUNCIONAR CIERTAS FUNCIONES\n" +
                         "===============================================================================\n");
             }
 
