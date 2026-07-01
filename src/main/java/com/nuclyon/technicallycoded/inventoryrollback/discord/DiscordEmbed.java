@@ -12,6 +12,7 @@ public class DiscordEmbed {
     private final String footer;
     private final String timestamp;
     private final String thumbnail;
+    private final String footerurl;
     private final List<DiscordEmbedField> fields;
 
     private DiscordEmbed(Builder builder) {
@@ -21,6 +22,7 @@ public class DiscordEmbed {
         this.footer = builder.footer;
         this.timestamp = builder.timestamp;
         this.thumbnail = builder.thumbnail;
+        this.footerurl = builder.footerurl;
         this.fields = Collections.unmodifiableList(new ArrayList<>(builder.fields));
     }
 
@@ -48,6 +50,8 @@ public class DiscordEmbed {
         return thumbnail;
     }
 
+    public String getFooterurl() { return footerurl;}
+
     public List<DiscordEmbedField> getFields() {
         return fields;
     }
@@ -60,6 +64,7 @@ public class DiscordEmbed {
         private String footer;
         private String timestamp;
         private String thumbnail;
+        private String footerurl;
         private final List<DiscordEmbedField> fields = new ArrayList<>();
 
         public Builder title(String title) {
@@ -87,6 +92,10 @@ public class DiscordEmbed {
             return this;
         }
 
+        public Builder footerurl(String footerurl) {
+            this.footerurl = footerurl;
+            return this;
+        }
 
         public Builder addField(DiscordEmbedField field) {
             this.fields.add(field);

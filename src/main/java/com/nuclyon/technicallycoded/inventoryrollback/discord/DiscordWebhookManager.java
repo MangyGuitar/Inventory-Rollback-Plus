@@ -28,6 +28,7 @@ public class DiscordWebhookManager {
     private String embedFooter;
     private boolean embedTimestamp;
     private String embedThumbnail;
+    private String embedFooterUrl;
     private String serverName;
 
     private DiscordWebhookManager() {}
@@ -52,6 +53,7 @@ public class DiscordWebhookManager {
         this.embedFooter = ConfigData.getDiscordEmbedFooter();
         this.embedTimestamp = ConfigData.isDiscordEmbedTimestamp();
         this.embedThumbnail = ConfigData.getDiscordEmbedThumbnail();
+        this.embedFooterUrl = ConfigData.getDiscordEmbedFooterUrl();
         this.serverName = ConfigData.getDiscordServerName();
     }
 
@@ -110,6 +112,10 @@ public class DiscordWebhookManager {
 
         if (embedThumbnail != null && !embedThumbnail.isEmpty()) {
             embedBuilder.thumbnail(embedThumbnail);
+        }
+
+        if (embedFooterUrl != null && !embedFooterUrl.isEmpty()) {
+            embedBuilder.footerurl(embedFooterUrl);
         }
 
         return new DiscordWebhookPayload.Builder()
@@ -241,8 +247,19 @@ public class DiscordWebhookManager {
 
         json.append("\"color\":").append(embed.getColor()).append(",");
 
-        if (embed.getFooter() != null && !embed.getFooter().isEmpty()) {
-            json.append("\"footer\":{\"text\":").append(escapeJson(embed.getFooter())).append("},");
+        boolean hasFooter = embed.getFooter() != null && !embed.getFooter().isEmpty();
+        boolean hasFooterUrl = embed.getFooterurl() != null && !embed.getFooterurl().isEmpty();
+
+        if (hasFooter || hasFooterUrl) {
+            json.append("\"footer\":{");
+            if (hasFooter) {
+                json.append("\"text\":").append(escapeJson(embed.getFooter()));
+            }
+            if (hasFooterUrl) {
+                if (hasFooter) json.append(",");
+                json.append("\"icon_url\":").append(escapeJson(embed.getFooterurl()));
+            }
+            json.append("},");
         }
 
         if (embed.getTimestamp() != null && !embed.getTimestamp().isEmpty()) {

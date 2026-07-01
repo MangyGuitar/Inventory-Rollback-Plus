@@ -89,8 +89,6 @@ bStats: true
 discord:
   enabled: false
   webhook-url: ""
-  username: "Rollback Logger"
-  avatar-url: ""
   server-name: ""
   embed:
     enabled: true
@@ -99,6 +97,7 @@ discord:
     footer: "InventoryRollbackPlus | Mangy Fork"
     timestamp: true
     thumbnail: ""
+    footer-url: ""
 
 # Debug mode - Prints extra information to the console.
 debug: false

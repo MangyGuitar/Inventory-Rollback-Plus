@@ -121,6 +121,7 @@ public class ConfigData {
     private static String discordEmbedFooter;
     private static boolean discordEmbedTimestamp;
     private static String discordEmbedThumbnail;
+    private static String discordEmbedFooterUrl;
 
     public void setVariables() {		
         setEnabled((boolean) getDefaultValue("enabled", true));
@@ -186,6 +187,7 @@ public class ConfigData {
         setDiscordEmbedFooter((String) getDefaultValue("discord.embed.footer", "InventoryRollbackPlus"));
         setDiscordEmbedTimestamp((boolean) getDefaultValue("discord.embed.timestamp", true));
         setDiscordEmbedThumbnail((String) getDefaultValue("discord.embed.thumbnail", ""));
+        setDiscordEmbedFooterUrl((String) getDefaultValue("discord.embed.footer-url", ""));
 
         if (saveChanges())
             saveConfig();
@@ -391,6 +393,7 @@ public class ConfigData {
 
     public static void setDiscordEmbedThumbnail(String thumbnail) { discordEmbedThumbnail = thumbnail;}
 
+    public static void setDiscordEmbedFooterUrl(String footerurl) { discordEmbedFooterUrl = footerurl;}
     // Discord getters
 
     public static boolean isDiscordEnabled() {
@@ -428,6 +431,8 @@ public class ConfigData {
     public static String getDiscordEmbedThumbnail() {
         return discordEmbedThumbnail;
     }
+
+    public static String getDiscordEmbedFooterUrl() { return discordEmbedFooterUrl; }
 
     public static boolean isEnabled() {
         return pluginEnabled;
