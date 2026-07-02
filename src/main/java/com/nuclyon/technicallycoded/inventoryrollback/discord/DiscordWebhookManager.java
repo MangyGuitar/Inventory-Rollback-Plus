@@ -58,12 +58,18 @@ public class DiscordWebhookManager {
     }
 
     public void sendRollbackWebhook(RollbackData data) {
+        sendRollbackWebhook(data, ActionType.GIVE_SHULKERS);
+    }
+
+    public void sendRollbackWebhook(RollbackData data, ActionType actionType) {
         if (!enabled || webhookUrl == null || webhookUrl.isEmpty()) return;
+        if (!ConfigData.isActionEnabled(actionType)) return;
+
         DiscordWebhookPayload payload;
         if (embedEnabled) {
-            payload = buildRollbackEmbed(data);
+            payload = buildActionEmbed(data, actionType);
         } else {
-            payload = buildRollbackPlain(data);
+            payload = buildActionPlain(data, actionType);
         }
 
         sendAsync(payload);
@@ -81,10 +87,16 @@ public class DiscordWebhookManager {
         sendAsync(payload);
     }
 
-    private DiscordWebhookPayload buildRollbackEmbed(RollbackData data) {
+    private DiscordWebhookPayload buildActionEmbed(RollbackData data, ActionType actionType) {
+        String actionTitle = ConfigData.getActionTitle(actionType);
+        String actionColorHex = ConfigData.getActionColor(actionType);
+
+        String title = (actionTitle != null && !actionTitle.isEmpty()) ? actionTitle : embedTitle;
+        int color = (actionColorHex != null && !actionColorHex.isEmpty()) ? parseHexColor(actionColorHex) : embedColor;
+
         DiscordEmbed.Builder embedBuilder = new DiscordEmbed.Builder()
-                .title(embedTitle)
-                .color(embedColor)
+                .title(title)
+                .color(color)
                 .addField(new DiscordEmbedField("Player", data.playerName, true))
                 .addField(new DiscordEmbedField("Staff", data.staffName, true))
                 .addField(new DiscordEmbedField("Items Restored", String.valueOf(data.itemCount), true))
@@ -124,9 +136,12 @@ public class DiscordWebhookManager {
                 .build();
     }
 
-    private DiscordWebhookPayload buildRollbackPlain(RollbackData data) {
+    private DiscordWebhookPayload buildActionPlain(RollbackData data, ActionType actionType) {
+        String actionTitle = ConfigData.getActionTitle(actionType);
+        String title = (actionTitle != null && !actionTitle.isEmpty()) ? actionTitle : embedTitle;
+
         StringBuilder sb = new StringBuilder();
-        sb.append("**Rollback Completed**\n");
+        sb.append("**").append(title).append("**\n");
         sb.append("**Player:** ").append(data.playerName).append("\n");
         sb.append("**Staff:** ").append(data.staffName).append("\n");
         sb.append("**Items Restored:** ").append(data.itemCount).append("\n");

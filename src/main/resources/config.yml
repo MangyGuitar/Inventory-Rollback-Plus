@@ -86,6 +86,7 @@ update-checker: true
 bStats: true
 
 ## Discord webhook integration for rollback notifications.
+## A single webhook URL is shared by all restore actions below.
 discord:
   enabled: false
   webhook-url: ""
@@ -98,6 +99,34 @@ discord:
     timestamp: true
     thumbnail: ""
     footer-url: ""
+  ## Per-action webhook settings. Each action can be independently toggled
+  ## and given its own embed title and color. The base embed config above
+  ## is used for all other embed properties (footer, timestamp, etc.).
+  actions:
+    give-shulkers:
+      enabled: true
+      title: "Shulkers Given to {player}"
+      color: "#00FF00"
+    restore-inventory:
+      enabled: true
+      title: "Inventory Restored for {player}"
+      color: "#00FF00"
+    restore-enderchest:
+      enabled: true
+      title: "Ender Chest Restored for {player}"
+      color: "#FFAA00"
+    restore-health:
+      enabled: true
+      title: "Health Restored for {player}"
+      color: "#FF5555"
+    restore-hunger:
+      enabled: true
+      title: "Hunger/Food Restored for {player}"
+      color: "#55FF55"
+    restore-xp:
+      enabled: true
+      title: "XP Restored for {player}"
+      color: "#5555FF"
 
 # Debug mode - Prints extra information to the console.
 debug: false

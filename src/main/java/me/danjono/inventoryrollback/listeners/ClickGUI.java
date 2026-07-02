@@ -2,6 +2,7 @@ package me.danjono.inventoryrollback.listeners;
 
 import com.nuclyon.technicallycoded.inventoryrollback.InventoryRollbackPlus;
 import com.nuclyon.technicallycoded.inventoryrollback.customdata.CustomDataItemEditor;
+import com.nuclyon.technicallycoded.inventoryrollback.discord.ActionType;
 import com.nuclyon.technicallycoded.inventoryrollback.discord.DiscordWebhookManager;
 import com.nuclyon.technicallycoded.inventoryrollback.discord.DiscordWebhookManager.RollbackData;
 import com.tcoded.lightlibs.bukkitversion.BukkitVersion;
@@ -395,7 +396,7 @@ public class ClickGUI implements Listener {
                             offlinePlayer.getName(), staff.getName(), itemCount,
                             rollbackId, world, locX, locY, locZ,
                             time, true);
-                    DiscordWebhookManager.getInstance().sendRollbackWebhook(rbData);
+                    DiscordWebhookManager.getInstance().sendRollbackWebhook(rbData, ActionType.GIVE_SHULKERS);
                 });
             }
 
@@ -479,7 +480,7 @@ public class ClickGUI implements Listener {
                                         offlinePlayer.getName(), staff.getName(), itemCount,
                                         rollbackId, world, locX, locY, locZ,
                                         time,true);
-                                DiscordWebhookManager.getInstance().sendRollbackWebhook(rbData);
+                                DiscordWebhookManager.getInstance().sendRollbackWebhook(rbData, ActionType.RESTORE_INVENTORY);
                             }
                         }.runTaskAsynchronously(main);
 
@@ -600,7 +601,7 @@ public class ClickGUI implements Listener {
                                     offlinePlayer.getName(), staff.getName(), 0,
                                     String.valueOf(timestamp), world, locX, locY, locZ,
                                     time, true);
-                            DiscordWebhookManager.getInstance().sendRollbackWebhook(rbData);
+                            DiscordWebhookManager.getInstance().sendRollbackWebhook(rbData, ActionType.RESTORE_HEALTH);
                         }
                     }.runTaskAsynchronously(main);
                 } else {
@@ -648,7 +649,7 @@ public class ClickGUI implements Listener {
                                     offlinePlayer.getName(), staff.getName(), 0,
                                     String.valueOf(timestamp), world, locX, locY, locZ,
                                     time, true);
-                            DiscordWebhookManager.getInstance().sendRollbackWebhook(rbData);
+                            DiscordWebhookManager.getInstance().sendRollbackWebhook(rbData, ActionType.RESTORE_HUNGER);
                         }
                     }.runTaskAsynchronously(main);
                 } else {
@@ -695,7 +696,7 @@ public class ClickGUI implements Listener {
                                     offlinePlayer.getName(), staff.getName(), 0,
                                     String.valueOf(timestamp), world, locX, locY, locZ,
                                     time, true);
-                            DiscordWebhookManager.getInstance().sendRollbackWebhook(rbData);
+                            DiscordWebhookManager.getInstance().sendRollbackWebhook(rbData, ActionType.RESTORE_XP);
                         }
                     }.runTaskAsynchronously(main);
                 } else {				    
@@ -909,7 +910,7 @@ public class ClickGUI implements Listener {
                             offlinePlayer.getName(), staff.getName(), itemCount,
                             String.valueOf(timestamp), world, locX, locY, locZ,
                             time, true);
-                    DiscordWebhookManager.getInstance().sendRollbackWebhook(rbData);
+                    DiscordWebhookManager.getInstance().sendRollbackWebhook(rbData, ActionType.GIVE_SHULKERS);
                 });
             }
 
@@ -972,7 +973,7 @@ public class ClickGUI implements Listener {
                                     offlinePlayer.getName(), staff.getName(), itemCount,
                                     String.valueOf(timestamp), world, locX, locY, locZ,
                                     time, true);
-                            DiscordWebhookManager.getInstance().sendRollbackWebhook(rbData);
+                            DiscordWebhookManager.getInstance().sendRollbackWebhook(rbData, ActionType.RESTORE_ENDER_CHEST);
                         }
                     }.runTaskAsynchronously(main);
 

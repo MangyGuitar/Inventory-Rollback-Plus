@@ -1,7 +1,9 @@
 package me.danjono.inventoryrollback.config;
 
 import com.nuclyon.technicallycoded.inventoryrollback.InventoryRollbackPlus;
+import com.nuclyon.technicallycoded.inventoryrollback.discord.ActionType;
 import me.danjono.inventoryrollback.InventoryRollback;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -122,6 +124,7 @@ public class ConfigData {
     private static boolean discordEmbedTimestamp;
     private static String discordEmbedThumbnail;
     private static String discordEmbedFooterUrl;
+    private static ConfigurationSection discordActionsSection;
 
     public void setVariables() {		
         setEnabled((boolean) getDefaultValue("enabled", true));
@@ -188,6 +191,15 @@ public class ConfigData {
         setDiscordEmbedTimestamp((boolean) getDefaultValue("discord.embed.timestamp", true));
         setDiscordEmbedThumbnail((String) getDefaultValue("discord.embed.thumbnail", ""));
         setDiscordEmbedFooterUrl((String) getDefaultValue("discord.embed.footer-url", ""));
+
+        // Action-specific webhook config defaults
+        for (ActionType action : ActionType.values()) {
+            String prefix = "discord.actions." + action.getConfigKey();
+            getDefaultValue(prefix + ".enabled", true);
+            getDefaultValue(prefix + ".title", getDefaultActionTitle(action));
+            getDefaultValue(prefix + ".color", getDefaultActionColor(action));
+        }
+        discordActionsSection = configuration.getConfigurationSection("discord.actions");
 
         if (saveChanges())
             saveConfig();
@@ -433,6 +445,47 @@ public class ConfigData {
     }
 
     public static String getDiscordEmbedFooterUrl() { return discordEmbedFooterUrl; }
+
+    // Action webhook config getters
+
+    public static boolean isActionEnabled(ActionType action) {
+        if (discordActionsSection == null) return true;
+        return discordActionsSection.getBoolean(action.getConfigKey() + ".enabled", true);
+    }
+
+    public static String getActionTitle(ActionType action) {
+        if (discordActionsSection == null) return "";
+        return discordActionsSection.getString(action.getConfigKey() + ".title", "");
+    }
+
+    public static String getActionColor(ActionType action) {
+        if (discordActionsSection == null) return "#57F287";
+        return discordActionsSection.getString(action.getConfigKey() + ".color", "#57F287");
+    }
+
+    private static String getDefaultActionTitle(ActionType action) {
+        switch (action) {
+            case GIVE_SHULKERS: return "Shulkers Given to {player}";
+            case RESTORE_INVENTORY: return "Inventory Restored for {player}";
+            case RESTORE_ENDER_CHEST: return "Ender Chest Restored for {player}";
+            case RESTORE_HEALTH: return "Health Restored for {player}";
+            case RESTORE_HUNGER: return "Hunger/Food Restored for {player}";
+            case RESTORE_XP: return "XP Restored for {player}";
+            default: return "Action Performed";
+        }
+    }
+
+    private static String getDefaultActionColor(ActionType action) {
+        switch (action) {
+            case GIVE_SHULKERS: return "#00FF00";
+            case RESTORE_INVENTORY: return "#00FF00";
+            case RESTORE_ENDER_CHEST: return "#FFAA00";
+            case RESTORE_HEALTH: return "#FF5555";
+            case RESTORE_HUNGER: return "#55FF55";
+            case RESTORE_XP: return "#5555FF";
+            default: return "#57F287";
+        }
+    }
 
     public static boolean isEnabled() {
         return pluginEnabled;
